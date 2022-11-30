@@ -8,6 +8,7 @@
     <string name="first_name">First Name</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="forgot_password_question">Forgot Password?</string>
+    <string name="hello_user">Hello %1s</string>
     <string name="last_name">Last Name</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
