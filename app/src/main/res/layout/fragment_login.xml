@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
-    tools:context=".LoginActivity">
+    android:padding="12dp"
+    tools:context=".ui.LoginActivity">
 
     <TextView
         android:id="@+id/login_txt"

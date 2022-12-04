@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "979863580546",
+    "project_id": "notes-app-eb770",
+    "storage_bucket": "notes-app-eb770.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979863580546:android:9fd14a194e5d0de334a99b",
+        "android_client_info": {
+          "package_name": "com.mobolajia.notesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "979863580546-9i7mldq9lgkddreqa6nom5i4e47neeeu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_qgDP_JZ9E0XQ5u0_qpPdysaplg0QBYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979863580546-9i7mldq9lgkddreqa6nom5i4e47neeeu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
