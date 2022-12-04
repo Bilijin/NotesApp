@@ -1,7 +1,8 @@
-package com.mobolajia.notesapp
+package com.mobolajia.notesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.mobolajia.notesapp.R
 
 class ForgotPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
