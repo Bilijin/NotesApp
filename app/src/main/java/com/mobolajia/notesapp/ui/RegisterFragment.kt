@@ -1,23 +1,28 @@
 package com.mobolajia.notesapp.ui
 
 import android.os.Bundle
-import android.util.Log
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.mobolajia.notesapp.R
 import com.mobolajia.notesapp.databinding.FragmentRegisterBinding
+import com.mobolajia.notesapp.utils.isValidEmail
+import com.mobolajia.notesapp.viewmodel.RegisterViewModel
+import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var auth: FirebaseAuth
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +45,23 @@ class RegisterFragment : Fragment() {
         }
         binding.registerBtn.setOnClickListener {
             disableFields(true)
-            if (areFieldsValid()) register(
-                binding.email.text.toString(),
-                binding.password.text.toString()
-            )
+            if (areFieldsValid()) {
+                viewModel.createUserAccount(binding.email.text.toString(),
+                    binding.password.text.toString())
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.registrationStatus.collect {
+                        if (it == "success") {
+                            //do success
+                            disableFields(false)
+                            Toast.makeText(this@RegisterFragment.context, "Registration Successful", Toast.LENGTH_SHORT).show()
+                        } else if (it == "failed"){
+                            disableFields(false)
+                            Toast.makeText(this@RegisterFragment.context, "Registration Failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
             else disableFields(false)
         }
     }
@@ -72,7 +90,7 @@ class RegisterFragment : Fragment() {
         } else if (binding.email.length() < 7) {
             binding.email.error = "Email is too short"
             return false
-        } else if (!isValidEmail(binding.email.text.toString())) {
+        } else if (!binding.email.text.toString().isValidEmail()) {
             binding.email.error = "Please enter a valid email"
             return false
         }
@@ -88,7 +106,7 @@ class RegisterFragment : Fragment() {
         if (binding.confirmPassword.text.isNullOrBlank()) {
             binding.confirmPasswordLyt.error = "Confirm password cannot be blank"
             return false
-        } else if (binding.confirmPassword.text != binding.password.text) {
+        } else if (binding.confirmPassword.text.toString() != binding.password.text.toString()) {
             binding.confirmPasswordLyt.error = "Confirm password must match password"
             return false
         }
@@ -106,19 +124,5 @@ class RegisterFragment : Fragment() {
         binding.registerBtn.isEnabled = !disabled
         if (disabled) binding.progressIndicator.show()
         else binding.progressIndicator.hide()
-    }
-
-    private fun register(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful) {
-                //do registration successful
-            } else {
-                disableFields(false)
-            }
-        }
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }
