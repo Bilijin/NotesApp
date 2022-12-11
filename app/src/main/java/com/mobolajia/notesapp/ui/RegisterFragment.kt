@@ -45,68 +45,90 @@ class RegisterFragment : Fragment() {
         }
         binding.registerBtn.setOnClickListener {
             disableFields(true)
-            if (areFieldsValid()) {
-                viewModel.createUserAccount(binding.email.text.toString(),
-                    binding.password.text.toString())
+            if (areFieldsValid(
+                    binding.firstName.text.toString(),
+                    binding.lastName.text.toString(),
+                    binding.email.text.toString(),
+                    binding.password.text.toString(),
+                    binding.confirmPassword.text.toString()
+                )
+            ) {
+                viewModel.createUserAccount(
+                    binding.email.text.toString(),
+                    binding.password.text.toString()
+                )
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.registrationStatus.collect {
                         if (it == "success") {
                             //do success
                             disableFields(false)
-                            Toast.makeText(this@RegisterFragment.context, "Registration Successful", Toast.LENGTH_SHORT).show()
-                        } else if (it == "failed"){
+                            Toast.makeText(
+                                this@RegisterFragment.context,
+                                "Registration Successful",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else if (it == "failed") {
                             disableFields(false)
-                            Toast.makeText(this@RegisterFragment.context, "Registration Failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@RegisterFragment.context,
+                                "Registration Failed",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
-            }
-            else disableFields(false)
+            } else disableFields(false)
         }
     }
 
-    private fun areFieldsValid(): Boolean {
+    private fun areFieldsValid(
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
 
-        if (binding.firstName.text.isNullOrBlank()) {
+        if (firstName.isBlank()) {
             binding.firstName.error = "First name cannot be empty"
             return false
-        } else if (binding.firstName.text.toString().length < 3) {
+        } else if (firstName.length < 3) {
             binding.firstName.error = "First name must have more than 3 characters"
             return false
         }
 
-        if (binding.lastName.text.isNullOrBlank()) {
+        if (lastName.isBlank()) {
             binding.lastName.error = "Last name cannot be empty"
             return false
-        } else if (binding.lastName.text.toString().length < 3) {
+        } else if (lastName.length < 3) {
             binding.lastName.error = "Last name must have more than 3 characters"
             return false
         }
 
-        if (binding.email.text.isNullOrBlank()) {
+        if (email.isBlank()) {
             binding.email.error = "Email cannot be empty"
             return false
-        } else if (binding.email.length() < 7) {
+        } else if (email.length < 7) {
             binding.email.error = "Email is too short"
             return false
-        } else if (!binding.email.text.toString().isValidEmail()) {
+        } else if (!email.isValidEmail()) {
             binding.email.error = "Please enter a valid email"
             return false
         }
 
-        if (binding.password.text.isNullOrBlank()) {
+        if (password.isBlank()) {
             binding.passwordLyt.error = "Password cannot be blank"
             return false
-        } else if (binding.password.text.toString().length < 6) {
+        } else if (password.length < 6) {
             binding.passwordLyt.error = "Password must have at least 6 characters"
             return false
         }
 
-        if (binding.confirmPassword.text.isNullOrBlank()) {
+        if (confirmPassword.isBlank()) {
             binding.confirmPasswordLyt.error = "Confirm password cannot be blank"
             return false
-        } else if (binding.confirmPassword.text.toString() != binding.password.text.toString()) {
+        } else if (confirmPassword != password) {
             binding.confirmPasswordLyt.error = "Confirm password must match password"
             return false
         }
