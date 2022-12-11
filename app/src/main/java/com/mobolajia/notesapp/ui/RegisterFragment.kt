@@ -1,6 +1,7 @@
 package com.mobolajia.notesapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,6 @@ import kotlinx.coroutines.launch
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var auth: FirebaseAuth
     private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +33,6 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        auth = Firebase.auth
         binding.progressIndicator.hide()
         setupClickListeners()
         return binding.root
@@ -48,33 +47,29 @@ class RegisterFragment : Fragment() {
             if (areFieldsValid(
                     binding.firstName.text.toString(),
                     binding.lastName.text.toString(),
-                    binding.email.text.toString(),
+                    binding.email.text.toString().trim().lowercase(),
                     binding.password.text.toString(),
                     binding.confirmPassword.text.toString()
                 )
             ) {
                 viewModel.createUserAccount(
-                    binding.email.text.toString(),
+                    binding.email.text.toString().trim().lowercase(),
                     binding.password.text.toString()
                 )
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.registrationStatus.collect {
-                        if (it == "success") {
-                            //do success
-                            disableFields(false)
-                            Toast.makeText(
-                                this@RegisterFragment.context,
-                                "Registration Successful",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else if (it == "failed") {
-                            disableFields(false)
-                            Toast.makeText(
-                                this@RegisterFragment.context,
-                                "Registration Failed",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        when (it) {
+                            "success" -> {
+                                showToastAndEnableFields("Registration Successful")
+                            }
+                            "failed" -> {
+                                showToastAndEnableFields("Registration Failed")
+                            }
+                            "n/a" -> {}
+                            else -> {
+                                showToastAndEnableFields(it)
+                            }
                         }
                     }
                 }
@@ -137,7 +132,6 @@ class RegisterFragment : Fragment() {
     }
 
     private fun disableFields(disabled: Boolean) {
-        binding.email.isEnabled = !disabled
         binding.firstName.isEnabled = !disabled
         binding.lastName.isEnabled = !disabled
         binding.email.isEnabled = !disabled
@@ -146,5 +140,10 @@ class RegisterFragment : Fragment() {
         binding.registerBtn.isEnabled = !disabled
         if (disabled) binding.progressIndicator.show()
         else binding.progressIndicator.hide()
+    }
+
+    private fun showToastAndEnableFields(text: String) {
+        disableFields(false)
+        Toast.makeText(this.context, text, Toast.LENGTH_SHORT).show()
     }
 }
