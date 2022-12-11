@@ -15,6 +15,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.mobolajia.notesapp.R
 import com.mobolajia.notesapp.databinding.FragmentRegisterBinding
+import com.mobolajia.notesapp.model.User
 import com.mobolajia.notesapp.utils.isValidEmail
 import com.mobolajia.notesapp.viewmodel.RegisterViewModel
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ class RegisterFragment : Fragment() {
                     viewModel.registrationStatus.collect {
                         when (it) {
                             "success" -> {
-                                showToastAndEnableFields("Registration Successful")
+                                addUserToDb()
                             }
                             "failed" -> {
                                 showToastAndEnableFields("Registration Failed")
@@ -130,6 +131,29 @@ class RegisterFragment : Fragment() {
 
         return true
     }
+
+    private fun addUserToDb() {
+        viewModel.addUserDetailsToDb(
+            binding.firstName.text.toString(),
+            binding.lastName.text.toString(),
+            binding.email.text.toString()
+        )
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.addUserDbStatus.collect { addDb ->
+                when (addDb) {
+                    "success" -> {
+                        showToastAndEnableFields("Success")
+                    }
+                    "n/a" -> {}
+                    else -> {
+                        showToastAndEnableFields(addDb)
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun disableFields(disabled: Boolean) {
         binding.firstName.isEnabled = !disabled
