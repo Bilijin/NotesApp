@@ -11,18 +11,21 @@ import androidx.navigation.fragment.findNavController
 import com.mobolajia.notesapp.R
 import com.mobolajia.notesapp.adapter.NotesListAdapter
 import com.mobolajia.notesapp.databinding.FragmentNotesListBinding
+import com.mobolajia.notesapp.utils.SharedPrefHelper
 import com.mobolajia.notesapp.viewmodel.NotesListViewModel
 import kotlinx.coroutines.launch
 
 class NotesListFragment : Fragment() {
     private lateinit var binding: FragmentNotesListBinding
     private val viewModel: NotesListViewModel by viewModels()
+    private lateinit var sharedPrefs : SharedPrefHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNotesListBinding.inflate(layoutInflater)
+        sharedPrefs = SharedPrefHelper(this.requireActivity())
         setupViews()
         return binding.root
     }
@@ -40,6 +43,12 @@ class NotesListFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.name.collect {
                 binding.helloUser.text = getString(R.string.hello_user, it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.noteCount.collect{
+                sharedPrefs.saveInt("note_count", it)
             }
         }
 

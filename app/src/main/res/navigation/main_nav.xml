@@ -67,5 +67,10 @@
         <action
             android:id="@+id/action_noteEditFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <argument
+            android:name="note"
+            app:argType="com.mobolajia.notesapp.model.Note"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

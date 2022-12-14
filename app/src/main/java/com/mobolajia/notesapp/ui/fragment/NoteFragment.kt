@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mobolajia.notesapp.databinding.FragmentNoteBinding
 import com.mobolajia.notesapp.model.Note
 
 class NoteFragment : Fragment() {
 
-    private lateinit var binding : FragmentNoteBinding
+    private lateinit var binding: FragmentNoteBinding
     private val args: NoteFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -24,8 +25,13 @@ class NoteFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupViews (note : Note) {
+    private fun setupViews(note: Note) {
         binding.noteTitle.text = note.title
         binding.noteText.text = note.text
+
+        binding.editBtn.setOnClickListener {
+            val action = NoteFragmentDirections.actionNoteFragmentToNoteEditFragment(note)
+            findNavController().navigate(action)
+        }
     }
 }

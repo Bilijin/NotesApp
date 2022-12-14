@@ -19,6 +19,8 @@ class NotesListViewModel : ViewModel() {
     val listOfNotes = _listOfNotes.asStateFlow()
     private val _name = MutableStateFlow(String())
     val name = _name.asStateFlow()
+    private var _noteCount = MutableStateFlow(0)
+    val noteCount = _noteCount.asStateFlow()
 
     init {
         getNotes()
@@ -40,8 +42,14 @@ class NotesListViewModel : ViewModel() {
         val userRef = db.collection("users")
             .document(auth.currentUser?.uid.toString())
         userRef.get().addOnSuccessListener { docSnap ->
-            _name.update {
-                docSnap.toObject<User>()?.first_name.orEmpty()
+            val user = docSnap.toObject<User>()
+            if (user != null) {
+                _name.update {
+                    user.first_name
+                }
+                _noteCount.update {
+                    user.note_count
+                }
             }
         }
 
