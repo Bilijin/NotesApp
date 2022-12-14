@@ -3,8 +3,10 @@
     <string name="app_name">NotesApp</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="don_have_acct">Don\'t have an account?</string>
+    <string name="edit">Edit</string>
     <string name="email_address">Email Address</string>
     <string name="enter_email_below">Enter your email address below to reset your account password</string>
+    <string name="enter_text_here">Enter text here …</string>
     <string name="first_name">First Name</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="forgot_password_question">Forgot Password?</string>
@@ -13,6 +15,7 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="update">Update</string>
 </resources>

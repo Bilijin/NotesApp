@@ -37,7 +37,7 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun addUserDetailsToDb(firstName : String, lastName: String, email : String) {
-        val user = User(firstName, lastName, email)
+        val user = User(firstName, lastName, email, 0)
         db.collection("users").document(auth.currentUser?.uid.toString())
             .set(user)
             .addOnSuccessListener {
