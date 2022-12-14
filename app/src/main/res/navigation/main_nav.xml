@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.mobolajia.notesapp.ui.RegisterFragment"
+        android:name="com.mobolajia.notesapp.ui.fragment.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.mobolajia.notesapp.ui.LoginFragment"
+        android:name="com.mobolajia.notesapp.ui.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -32,12 +32,25 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.mobolajia.notesapp.ui.ForgotPasswordFragment"
+        android:name="com.mobolajia.notesapp.ui.fragment.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/notesListFragment"
-        android:name="com.mobolajia.notesapp.ui.NotesListFragment"
+        android:name="com.mobolajia.notesapp.ui.fragment.NotesListFragment"
         android:label="fragment_notes_list"
-        tools:layout="@layout/fragment_notes_list" />
+        tools:layout="@layout/fragment_notes_list" >
+        <action
+            android:id="@+id/action_notesListFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.mobolajia.notesapp.ui.fragment.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note" >
+        <argument
+            android:name="note"
+            app:argType="com.mobolajia.notesapp.model.Note" />
+    </fragment>
 </navigation>

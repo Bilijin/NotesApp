@@ -1,4 +1,4 @@
-package com.mobolajia.notesapp.ui
+package com.mobolajia.notesapp.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
