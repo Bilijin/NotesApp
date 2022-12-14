@@ -56,6 +56,7 @@ class LoginFragment : Fragment() {
                         when (it) {
                             "success" -> {
                                 showToastAndEnableFields("Login Successful")
+                                findNavController().navigate(R.id.action_loginFragment_to_notesListFragment)
                             }
                             "failed" -> {
                                 showToastAndEnableFields("Login Failed")
