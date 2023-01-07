@@ -139,6 +139,7 @@ class RegisterFragment : Fragment() {
                 when (addDb) {
                     "success" -> {
                         showToastAndEnableFields("Success")
+                        findNavController().navigate(R.id.action_registerFragment_to_notesListFragment)
                     }
                     "n/a" -> {}
                     else -> {

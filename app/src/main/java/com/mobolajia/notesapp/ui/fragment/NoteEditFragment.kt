@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.mobolajia.notesapp.R
 import com.mobolajia.notesapp.databinding.FragmentNoteEditBinding
 import com.mobolajia.notesapp.model.Note
 import com.mobolajia.notesapp.utils.SharedPrefHelper
@@ -51,13 +53,13 @@ class NoteEditFragment : Fragment() {
                     vm.saveNote(it)
                 }
             } else {
-                val note = Note(
+                note = Note(
                     binding.noteTitle.text.toString(),
                     binding.noteText.text.toString(),
                     "today",
                     ++noteCount
                 )
-                vm.saveNote(note)
+                note?.let {vm.saveNote(it)}
             }
 
             lifecycleScope.launch {
@@ -71,6 +73,8 @@ class NoteEditFragment : Fragment() {
                             ).show()
                             sharedPrefs.saveInt("note_count", noteCount)
                             vm.updateNoteCount(noteCount)
+                            val action = NoteFragmentDirections.actionNoteFragmentToNoteEditFragment(note)
+                            findNavController().navigate(action)
                         }
                         else -> {
                             Toast.makeText(this@NoteEditFragment.context, it, Toast.LENGTH_SHORT)

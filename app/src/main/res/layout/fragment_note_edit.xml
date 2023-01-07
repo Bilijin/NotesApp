@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:gravity="top"
             android:hint="@string/enter_text_here"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:textSize="20sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>
