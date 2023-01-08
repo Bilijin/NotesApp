@@ -80,7 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e5e5e5"
-        app:layout_constraintTop_toBottomOf="@id/delete_account"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/delete_account"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
