@@ -27,6 +27,7 @@ class NotesListFragment : Fragment() {
         binding = FragmentNotesListBinding.inflate(layoutInflater)
         sharedPrefs = SharedPrefHelper(this.requireActivity())
         setupViews()
+        setupClickListeners()
         return binding.root
     }
 
@@ -51,9 +52,15 @@ class NotesListFragment : Fragment() {
                 sharedPrefs.saveInt("note_count", it)
             }
         }
+    }
 
+    private fun setupClickListeners() {
         binding.newNoteBtn.setOnClickListener {
             findNavController().navigate(R.id.action_notesListFragment_to_noteEditFragment)
+        }
+
+        binding.openProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_notesListFragment_to_profileFragment)
         }
     }
 }

@@ -16,6 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/open_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_baseline_settings_24"
+        app:layout_constraintTop_toTopOf="@id/hello_user"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_recycler"
         android:layout_width="match_parent"
@@ -32,7 +41,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="new note"
+        android:text="@string/new_note"
         android:layout_margin="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
