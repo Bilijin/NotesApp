@@ -8,14 +8,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class ProfileViewModel : ViewModel() {
-    val user = Firebase.auth.currentUser
+    private val user = Firebase.auth.currentUser
     private val _name = MutableStateFlow(String())
     val name = _name.asStateFlow()
     private val _email = MutableStateFlow(String())
     val email = _email.asStateFlow()
 
     init {
-
+        getUserDetails()
     }
 
     private fun getUserDetails() {

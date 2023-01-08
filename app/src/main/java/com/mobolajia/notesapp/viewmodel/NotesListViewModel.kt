@@ -25,7 +25,7 @@ class NotesListViewModel : ViewModel() {
         getUserName()
     }
 
-    private fun getNotes() {
+    fun getNotes() {
         val notesRef = db.collection("notes/${auth.currentUser?.uid.toString()}/userNotes")
         notesRef.get().addOnSuccessListener { querySnap ->
             val notes = ArrayList<Note>()

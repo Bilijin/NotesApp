@@ -63,4 +63,9 @@ class NotesListFragment : Fragment() {
             findNavController().navigate(R.id.action_notesListFragment_to_profileFragment)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNotes()
+    }
 }
