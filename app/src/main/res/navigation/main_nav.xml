@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_notesListFragment_to_noteEditFragment"
             app:destination="@id/noteEditFragment" />
+        <action
+            android:id="@+id/action_notesListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
@@ -77,4 +80,9 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mobolajia.notesapp.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
