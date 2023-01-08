@@ -29,9 +29,4 @@ class NoteEditViewModel : ViewModel() {
                 }
             }
     }
-
-    fun updateNoteCount(count: Int) {
-        db.collection("users").document(auth.currentUser?.uid.toString())
-            .update("note_count", count)
-    }
 }

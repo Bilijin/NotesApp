@@ -72,8 +72,7 @@ class NoteEditFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                             sharedPrefs.saveInt("note_count", noteCount)
-                            vm.updateNoteCount(noteCount)
-                            val action = NoteFragmentDirections.actionNoteFragmentToNoteEditFragment(note)
+                            val action = NoteEditFragmentDirections.actionNoteEditFragmentToNoteFragment(note!!)
                             findNavController().navigate(action)
                         }
                         else -> {
