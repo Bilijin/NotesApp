@@ -54,13 +54,13 @@
         android:id="@+id/noteFragment"
         android:name="com.mobolajia.notesapp.ui.fragment.NoteFragment"
         android:label="fragment_note"
-        tools:layout="@layout/fragment_note" >
+        tools:layout="@layout/fragment_note">
         <argument
             android:name="note"
             app:argType="com.mobolajia.notesapp.model.Note" />
         <action
             android:id="@+id/action_noteFragment_to_noteEditFragment"
-            app:destination="@id/noteEditFragment" />
+            app:destination="@id/noteEditFragment"/>
     </fragment>
     <fragment
         android:id="@+id/noteEditFragment"
@@ -69,7 +69,8 @@
         tools:layout="@layout/fragment_note_edit" >
         <action
             android:id="@+id/action_noteEditFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/noteFragment"
+            app:popUpTo="@id/notesListFragment"/>
         <argument
             android:name="note"
             app:argType="com.mobolajia.notesapp.model.Note"

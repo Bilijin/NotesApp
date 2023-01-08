@@ -128,10 +128,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun addUserToDb() {
-        viewModel.addUserDetailsToDb(
+        viewModel.updateUserDetails(
             binding.firstName.text.toString(),
-            binding.lastName.text.toString(),
-            binding.email.text.toString()
+            binding.lastName.text.toString()
         )
 
         viewLifecycleOwner.lifecycleScope.launch {

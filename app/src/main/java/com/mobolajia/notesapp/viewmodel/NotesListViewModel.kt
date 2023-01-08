@@ -1,13 +1,12 @@
 package com.mobolajia.notesapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.mobolajia.notesapp.model.Note
-import com.mobolajia.notesapp.model.User
+import com.mobolajia.notesapp.model.UserNote
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -34,24 +33,15 @@ class NotesListViewModel : ViewModel() {
             querySnap.documents.forEach { docSnap ->
                 docSnap.toObject<Note>()?.let { notes.add(it) }
             }
+            _noteCount.update { notes.size }
             _listOfNotes.update { notes }
         }
     }
 
     private fun getUserName() {
-        val userRef = db.collection("users")
-            .document(auth.currentUser?.uid.toString())
-        userRef.get().addOnSuccessListener { docSnap ->
-            val user = docSnap.toObject<User>()
-            if (user != null) {
-                _name.update {
-                    user.first_name
-                }
-                _noteCount.update {
-                    user.note_count
-                }
-            }
+        _name.update {
+            auth.currentUser?.displayName.toString()
         }
-
     }
+
 }
