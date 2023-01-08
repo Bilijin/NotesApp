@@ -99,6 +99,7 @@ class LoginFragment : Fragment() {
         binding.email.isEnabled = !disabled
         binding.email.isEnabled = !disabled
         binding.password.isEnabled = !disabled
+        binding.loginBtn.isEnabled = !disabled
         if (disabled) binding.progressIndicator.show()
         else binding.progressIndicator.hide()
     }

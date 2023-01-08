@@ -2,9 +2,9 @@ package com.mobolajia.notesapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.mobolajia.notesapp.model.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -35,17 +35,18 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    fun addUserDetailsToDb(firstName : String, lastName: String, email : String) {
-        val user = User(firstName, lastName, email, 0)
-        db.collection("users").document(auth.currentUser?.uid.toString())
-            .set(user)
-            .addOnSuccessListener {
-                _addUserDbStatus.update { "success" }
-                _addUserDbStatus.update { "n/a" }
-            }
-            .addOnFailureListener { exception ->
-                _addUserDbStatus.update { exception.message.orEmpty() }
-                _addUserDbStatus.update { "n/a" }
-            }
+    fun updateUserDetails(firstName : String, lastName: String) {
+
+        val profileInfo = userProfileChangeRequest {
+            displayName = "$firstName $lastName"
+        }
+
+        auth.currentUser?.updateProfile(profileInfo)?.addOnSuccessListener {
+            _addUserDbStatus.update { "success" }
+            _addUserDbStatus.update { "n/a" }
+        }?.addOnFailureListener { exception ->
+            _addUserDbStatus.update { exception.message.orEmpty() }
+            _addUserDbStatus.update { "n/a" }
+        }
     }
 }
