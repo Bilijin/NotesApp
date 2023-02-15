@@ -38,7 +38,6 @@ class LoginTests {
         onView(withId(R.id.first_name_lyt)).check(matches(isDisplayed()))
         onView(withId(R.id.register_btn)).check(matches(isDisplayed()))
     }
-
     @Test
     fun leaving_email_blank_returns_error() {
         onView(withId(R.id.password)).perform(typeText("password"), closeSoftKeyboard())
@@ -50,11 +49,6 @@ class LoginTests {
     fun leaving_password_blank_returns_error() {
         onView(withId(R.id.email)).perform(typeText("test@test.com"), closeSoftKeyboard())
         onView(withId(R.id.login_btn)).perform(click())
-        onView(withId(R.id.password_lyt)).check(matches(withText("Password cannot be blank")))
-//        onView(withId(R.id.password)).check(matches(hasErrorText("Password cannot be blank")))
+        onView(withText("Password cannot be blank")).check(matches(isDisplayed()))
     }
-
-    // onView(withText(errorMessage)).check(matches(isDisplayed()))
-    //onView(withId(R.id.textinput_error)).check(matches(withText(errorMessage)))
-    //onView(withId(viewId)).check(matches(textInputLayoutErrorTextMatcher(getString(stringId))))
 }
