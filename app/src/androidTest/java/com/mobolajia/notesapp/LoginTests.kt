@@ -22,7 +22,7 @@ class LoginTests {
     fun app_opens_on_login_screen(){
         onView(withId(R.id.login_txt)).check(matches(isDisplayed()))
         onView(withId(R.id.email_lyt)).check(matches(isDisplayed()))
-        onView(withId(R.id.password_lyt)).check(matches(isDisplayed()))
+        onView(withId(R.id.password_ly)).check(matches(isDisplayed()))
         onView(withId(R.id.login_btn)).check(matches(isDisplayed()))
     }
 
