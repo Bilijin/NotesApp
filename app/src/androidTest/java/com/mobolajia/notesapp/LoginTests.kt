@@ -50,7 +50,7 @@ class LoginTests {
     fun leaving_password_blank_returns_error() {
         onView(withId(R.id.email)).perform(typeText("test@test.com"), closeSoftKeyboard())
         onView(withId(R.id.login_btn)).perform(click())
-        onView(withId(R.id.password_lyt)).check(matches(withText("Password cannot be blank")))
+        onView(withText("Password cannot be blank")).check(matches(isDisplayed()))
     }
 
 }
