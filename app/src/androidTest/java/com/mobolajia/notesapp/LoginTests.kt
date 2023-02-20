@@ -1,10 +1,9 @@
 package com.mobolajia.notesapp
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.mobolajia.notesapp.ui.activity.MainActivity
 import org.junit.Rule
@@ -19,7 +18,7 @@ class LoginTests {
     val activity = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun app_opens_on_login_screen(){
+    fun app_opens_on_login_screen() {
         onView(withId(R.id.login_txt)).check(matches(isDisplayed()))
         onView(withId(R.id.email_lyt)).check(matches(isDisplayed()))
         onView(withId(R.id.password_lyt)).check(matches(isDisplayed()))
@@ -39,4 +38,23 @@ class LoginTests {
         onView(withId(R.id.first_name_lyt)).check(matches(isDisplayed()))
         onView(withId(R.id.register_btn)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun leaving_email_blank_returns_error() {
+        onView(withId(R.id.password)).perform(typeText("password"), closeSoftKeyboard())
+        onView(withId(R.id.login_btn)).perform(click())
+        onView(withId(R.id.email)).check(matches(hasErrorText("Email cannot be empty")))
+    }
+
+    @Test
+    fun leaving_password_blank_returns_error() {
+        onView(withId(R.id.email)).perform(typeText("test@test.com"), closeSoftKeyboard())
+        onView(withId(R.id.login_btn)).perform(click())
+        onView(withId(R.id.password_lyt)).check(matches(withText("Password cannot be blank")))
+//        onView(withId(R.id.password)).check(matches(hasErrorText("Password cannot be blank")))
+    }
+
+    // onView(withText(errorMessage)).check(matches(isDisplayed()))
+    //onView(withId(R.id.textinput_error)).check(matches(withText(errorMessage)))
+    //onView(withId(viewId)).check(matches(textInputLayoutErrorTextMatcher(getString(stringId))))
 }
