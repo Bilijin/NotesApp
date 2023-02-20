@@ -25,7 +25,7 @@ class NoteEditViewModel : ViewModel() {
             }
             .addOnFailureListener { exception ->
                 _noteSaveStatus.update {
-                    exception.localizedMessage.orEmpty()
+                    "failed " + exception.localizedMessage.orEmpty()
                 }
             }
     }
