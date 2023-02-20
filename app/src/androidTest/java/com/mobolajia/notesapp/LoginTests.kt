@@ -51,10 +51,7 @@ class LoginTests {
         onView(withId(R.id.email)).perform(typeText("test@test.com"), closeSoftKeyboard())
         onView(withId(R.id.login_btn)).perform(click())
         onView(withId(R.id.password_lyt)).check(matches(withText("Password cannot be blank")))
-//        onView(withId(R.id.password)).check(matches(hasErrorText("Password cannot be blank")))
     }
 
-    // onView(withText(errorMessage)).check(matches(isDisplayed()))
-    //onView(withId(R.id.textinput_error)).check(matches(withText(errorMessage)))
-    //onView(withId(viewId)).check(matches(textInputLayoutErrorTextMatcher(getString(stringId))))
 }
+
