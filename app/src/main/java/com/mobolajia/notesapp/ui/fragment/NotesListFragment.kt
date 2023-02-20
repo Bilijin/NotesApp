@@ -1,6 +1,7 @@
 package com.mobolajia.notesapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.mobolajia.notesapp.adapter.NotesListAdapter
 import com.mobolajia.notesapp.databinding.FragmentNotesListBinding
 import com.mobolajia.notesapp.utils.SharedPrefHelper
 import com.mobolajia.notesapp.viewmodel.NotesListViewModel
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NotesListFragment : Fragment() {

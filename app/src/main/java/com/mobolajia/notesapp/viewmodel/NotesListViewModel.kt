@@ -19,9 +19,10 @@ class NotesListViewModel : ViewModel() {
     val name = _name.asStateFlow()
     private var _noteCount = MutableStateFlow(0)
     val noteCount = _noteCount.asStateFlow()
+    private val _delNote = MutableStateFlow(String())
+    val delNote = _delNote.asStateFlow()
 
     init {
-        getNotes()
         getUserName()
     }
 
@@ -40,6 +41,16 @@ class NotesListViewModel : ViewModel() {
     private fun getUserName() {
         _name.update {
             auth.currentUser?.displayName.toString()
+        }
+    }
+
+    fun deleteNote(noteId: Int) {
+        val noteRef = db.document("notes/${auth.currentUser?.uid.toString()}/userNotes/$noteId")
+        noteRef.delete().addOnSuccessListener {
+            _delNote.update { "true" }
+            getNotes()
+        }.addOnFailureListener {
+            _delNote.update { "false" }
         }
     }
 
