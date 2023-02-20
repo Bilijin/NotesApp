@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.mobolajia.notesapp.R
 import com.mobolajia.notesapp.databinding.FragmentRegisterBinding
 import com.mobolajia.notesapp.utils.isValidEmail
+import com.mobolajia.notesapp.utils.validatePassword
 import com.mobolajia.notesapp.viewmodel.RegisterViewModel
 import kotlinx.coroutines.launch
 
@@ -108,18 +109,12 @@ class RegisterFragment : Fragment() {
             return false
         }
 
-        if (password.isBlank()) {
-            binding.passwordLyt.error = "Password cannot be blank"
-            return false
-        } else if (password.length < 6) {
-            binding.passwordLyt.error = "Password must have at least 6 characters"
+        if (password.validatePassword() != "true") {
+            binding.passwordLyt.error = password.validatePassword()
             return false
         }
 
-        if (confirmPassword.isBlank()) {
-            binding.confirmPasswordLyt.error = "Confirm password cannot be blank"
-            return false
-        } else if (confirmPassword != password) {
+         if (confirmPassword != password) {
             binding.confirmPasswordLyt.error = "Confirm password must match password"
             return false
         }

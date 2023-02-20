@@ -35,8 +35,10 @@
               <option name="preferredColumnWidths">
                 <map>
                   <entry key="Duration" value="90" />
+                  <entry key="HUAWEI&#10; STK-L21" value="120" />
                   <entry key="Pixel_5_API_28" value="120" />
                   <entry key="Tests" value="360" />
+                  <entry key="XMJNW19B28002138" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
