@@ -64,8 +64,8 @@ class NoteEditFragment : Fragment() {
 
             lifecycleScope.launch {
                 vm.noteSaveStatus.collect {
-                    when (it) {
-                        "success" -> {
+                    when{
+                        it == "success" -> {
                             Toast.makeText(
                                 this@NoteEditFragment.context,
                                 "Note Saved successfully",
@@ -75,8 +75,8 @@ class NoteEditFragment : Fragment() {
                             val action = NoteEditFragmentDirections.actionNoteEditFragmentToNoteFragment(note!!)
                             findNavController().navigate(action)
                         }
-                        else -> {
-                            Toast.makeText(this@NoteEditFragment.context, it, Toast.LENGTH_SHORT)
+                        it.startsWith("failed") -> {
+                            Toast.makeText(this@NoteEditFragment.context, it.substringAfter("failed"), Toast.LENGTH_SHORT)
                                 .show()
                         }
                     }
