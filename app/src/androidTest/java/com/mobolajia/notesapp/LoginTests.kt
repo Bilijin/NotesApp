@@ -52,6 +52,4 @@ class LoginTests {
         onView(withId(R.id.login_btn)).perform(click())
         onView(withText("Password cannot be blank")).check(matches(isDisplayed()))
     }
-
 }
-

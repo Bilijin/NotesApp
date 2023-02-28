@@ -59,24 +59,29 @@ class NoteEditFragment : Fragment() {
                     "today",
                     ++noteCount
                 )
-                note?.let {vm.saveNote(it)}
+                note?.let { vm.saveNote(it) }
             }
 
             lifecycleScope.launch {
                 vm.noteSaveStatus.collect {
-                    when{
+                    when {
                         it == "success" -> {
                             Toast.makeText(
                                 this@NoteEditFragment.context,
-                                "Note Saved successfully",
+                                getString(R.string.note_saved),
                                 Toast.LENGTH_SHORT
                             ).show()
                             sharedPrefs.saveInt("note_count", noteCount)
-                            val action = NoteEditFragmentDirections.actionNoteEditFragmentToNoteFragment(note!!)
+                            val action =
+                                NoteEditFragmentDirections.actionNoteEditFragmentToNoteFragment(note!!)
                             findNavController().navigate(action)
                         }
                         it.startsWith("failed") -> {
-                            Toast.makeText(this@NoteEditFragment.context, it.substringAfter("failed"), Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                this@NoteEditFragment.context,
+                                it.substringAfter("failed"),
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
                         }
                     }

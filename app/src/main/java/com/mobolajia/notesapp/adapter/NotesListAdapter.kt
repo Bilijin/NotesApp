@@ -43,12 +43,12 @@ class NotesListAdapter(private val vm: NotesListViewModel, private val context: 
                     when (it) {
                         "true" -> Toast.makeText(
                             context.requireContext(),
-                            "Note deleted!!",
+                            context.getString(R.string.note_deleted),
                             Toast.LENGTH_SHORT
                         ).show()
                         "false" -> Toast.makeText(
                             context.requireContext(),
-                            "Note deletion failed, Please try again!!",
+                            context.getString(R.string.note_delete_fail),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

@@ -14,9 +14,11 @@
         android:drawablePadding="4dp"
         android:paddingVertical="8dp"
         android:text="@string/name_template"
+        android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_person_24"
         app:layout_constraintBottom_toTopOf="@id/view1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <View
         android:id="@+id/view1"
@@ -33,6 +35,7 @@
         android:drawablePadding="4dp"
         android:paddingVertical="8dp"
         android:text="@string/email_template"
+        android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_alternate_email_24"
         app:layout_constraintBottom_toTopOf="@id/view2"
         app:layout_constraintTop_toBottomOf="@id/view1" />
@@ -42,26 +45,81 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e5e5e5"
-        app:layout_constraintTop_toBottomOf="@id/email"
-        app:layout_constraintBottom_toTopOf="@id/reset_password"/>
+        app:layout_constraintBottom_toTopOf="@id/change_password"
+        app:layout_constraintTop_toBottomOf="@id/email" />
 
     <TextView
-        android:id="@+id/reset_password"
+        android:id="@+id/change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="4dp"
         android:paddingVertical="8dp"
         android:text="@string/change_password"
+        android:textSize="16sp"
+        app:drawableEndCompat="@drawable/baseline_edit_24"
         app:drawableStartCompat="@drawable/ic_baseline_lock_24"
-        app:layout_constraintBottom_toTopOf="@id/view3"
+        app:layout_constraintBottom_toTopOf="@id/change_password_lyt"
         app:layout_constraintTop_toBottomOf="@id/view2" />
+
+    <LinearLayout
+        android:id="@+id/change_password_lyt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/view3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/change_password">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_lyt"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:hint="@string/password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/new_password_lyt"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/new_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/save_change_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_save_24" />
+    </LinearLayout>
 
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e5e5e5"
-        app:layout_constraintTop_toBottomOf="@id/reset_password" />
+        app:layout_constraintTop_toBottomOf="@id/change_password_lyt" />
 
     <TextView
         android:id="@+id/delete_account"
@@ -71,6 +129,7 @@
         android:paddingVertical="8dp"
         android:text="@string/delete_account"
         android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
         app:drawableStartCompat="@drawable/ic_baseline_delete_forever_24"
         app:layout_constraintBottom_toTopOf="@id/view4"
         app:layout_constraintTop_toBottomOf="@id/view3" />
@@ -80,6 +139,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e5e5e5"
-        app:layout_constraintTop_toBottomOf="@id/delete_account"/>
+        app:layout_constraintTop_toBottomOf="@id/delete_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
