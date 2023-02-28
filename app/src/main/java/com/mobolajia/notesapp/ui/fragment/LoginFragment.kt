@@ -55,11 +55,11 @@ class LoginFragment : Fragment() {
                     viewModel.loginStatus.collect {
                         when (it) {
                             "success" -> {
-                                showToastAndEnableFields("Login Successful")
+                                showToastAndEnableFields(getString(R.string.login_success))
                                 findNavController().navigate(R.id.action_loginFragment_to_notesListFragment)
                             }
                             "failed" -> {
-                                showToastAndEnableFields("Login Failed")
+                                showToastAndEnableFields(getString(R.string.login_failed))
                             }
                             "n/a" -> {}
                             else -> {
@@ -74,21 +74,21 @@ class LoginFragment : Fragment() {
 
     private fun areFieldsValid(email: String, password: String): Boolean {
         if (email.isBlank()) {
-            binding.email.error = "Email cannot be empty"
+            binding.email.error = getString(R.string.email_blank)
             return false
         } else if (email.length < 7) {
-            binding.email.error = "Email is too short"
+            binding.email.error = getString(R.string.email_short)
             return false
         } else if (!email.isValidEmail()) {
-            binding.email.error = "Please enter a valid email"
+            binding.email.error = getString(R.string.enter_a_valid_email)
             return false
         }
 
         if (password.isBlank()) {
-            binding.passwordLyt.error = "Password cannot be blank"
+            binding.passwordLyt.error = getString(R.string.password_blank)
             return false
         } else if (password.length < 6) {
-            binding.passwordLyt.error = "Password must have at least 6 characters"
+            binding.passwordLyt.error = getString(R.string.password_invalid)
             return false
         }
 

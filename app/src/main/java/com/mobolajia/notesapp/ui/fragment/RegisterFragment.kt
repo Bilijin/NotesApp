@@ -99,13 +99,13 @@ class RegisterFragment : Fragment() {
         }
 
         if (email.isBlank()) {
-            binding.email.error = "Email cannot be empty"
+            binding.email.error = getString(R.string.email_blank)
             return false
         } else if (email.length < 7) {
-            binding.email.error = "Email is too short"
+            binding.email.error = getString(R.string.email_short)
             return false
         } else if (!email.isValidEmail()) {
-            binding.email.error = "Please enter a valid email"
+            binding.email.error = getString(R.string.enter_a_valid_email)
             return false
         }
 
@@ -115,7 +115,7 @@ class RegisterFragment : Fragment() {
         }
 
          if (confirmPassword != password) {
-            binding.confirmPasswordLyt.error = "Confirm password must match password"
+            binding.confirmPasswordLyt.error = getString(R.string.confirm_password_not_match)
             return false
         }
 

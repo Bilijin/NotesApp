@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
                 if (it == "success") {
                     Toast.makeText(
                         requireContext(),
-                        "Password changed successfully. Please login again",
+                        getString(R.string.password_changed_login),
                         Toast.LENGTH_SHORT
                     ).show()
                     findNavController().navigate(R.id.action_profileFragment_to_loginFragment)

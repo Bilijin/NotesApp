@@ -36,7 +36,7 @@ class ForgotPasswordFragment : Fragment() {
 
     private fun checkEmail(): Boolean {
         if (binding.email.text.isNullOrBlank()) {
-            binding.email.error = getString(R.string.email_cannot_be_blank)
+            binding.email.error = getString(R.string.email_blank)
             return false
         }
 
@@ -55,14 +55,13 @@ class ForgotPasswordFragment : Fragment() {
                 disableFields(true)
                 Executors.newSingleThreadExecutor().execute {
                     val isThereInternet = isInternetConnected()
-                    Log.d("uuu",isThereInternet.toString() )
                     Handler(Looper.getMainLooper()).post {
                         if (isThereInternet) {
                             vm.resetPassword(binding.email.text.toString())
                             monitorEmailStatus()
                         } else {
                             disableFields(false)
-                            Toast.makeText(this.context, "No Internet", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this.context, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -77,7 +76,7 @@ class ForgotPasswordFragment : Fragment() {
                     "success" -> {
                         Toast.makeText(
                             this@ForgotPasswordFragment.context,
-                            "An email to reset your password has been sent to your email",
+                            getString(R.string.password_reset_email_sent),
                             Toast.LENGTH_SHORT
                         ).show()
                         findNavController().popBackStack()

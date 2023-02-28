@@ -20,7 +20,6 @@ fun isInternetConnected(): Boolean =
     }
 
 fun String.validatePassword() : String {
-    Log.d("Validate Password", this)
     return when {
         length < 6 -> "Password too short. Minimum 6 characters"
         !contains(Regex("\\d")) -> "Password must contain at least one number"
