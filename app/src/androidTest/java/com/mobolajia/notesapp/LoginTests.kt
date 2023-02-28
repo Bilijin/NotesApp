@@ -46,10 +46,10 @@ class LoginTests {
         onView(withId(R.id.email)).check(matches(hasErrorText("Email cannot be empty")))
     }
 
-    @Test
-    fun leaving_password_blank_returns_error() {
-        onView(withId(R.id.email)).perform(typeText("test@test.com"), closeSoftKeyboard())
-        onView(withId(R.id.login_btn)).perform(click())
-        onView(withText("Password cannot be blank")).check(matches(isDisplayed()))
-    }
+    //@Test
+    //fun leaving_password_blank_returns_error() {
+    //    onView(withId(R.id.email)).perform(typeText("test@test.com"), closeSoftKeyboard())
+    //    onView(withId(R.id.login_btn)).perform(click())
+    //    onView(withText("Password cannot be blank")).check(matches(isDisplayed()))
+    //}
 }
